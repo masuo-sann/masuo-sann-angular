@@ -1,0 +1,25 @@
+
+<h1 mat-dialog-title>SearchRequest</h1>
+<div mat-dialog-content>
+  <!-- 検索語 -->
+  <h2>検索語</h2>
+  <span>{{data.searchWord}}</span>
+  <mat-divider></mat-divider>
+  <!-- 検索件数 -->
+  <h2>検索件数</h2>
+  <span>{{data.requestnumber}}</span>
+  <mat-divider></mat-divider>
+  <!-- 検索期間 -->
+  <h2>検索期間</h2>
+  <span>{{data.searchPeriod}}</span>
+  <mat-divider></mat-divider>
+  <!-- 分析オプション -->
+  <h2>分析オプション</h2>
+  <span>{{data.sentiment}}</span>
+  <span>{{data.entity}}</span>
+  <mat-divider></mat-divider>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">CANCEL</button>
+  <button mat-button color="primary" [mat-dialog-close]="data" (click)="searchRequest()" cdkFocusInitial>OK</button>
+</div>

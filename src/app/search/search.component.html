@@ -1,3 +1,44 @@
-<p>
-  search works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+        検索リクエスト
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <!-- コンテンツ -->
+  <mat-card-content>
+    <p></p>
+    <!-- 検索語 -->
+    <h2>検索語</h2>
+    <mat-form-field>
+        <input matInput type="text" placeholder="search word" [(ngModel)]="searchWord">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <!-- 検索件数 -->
+    <h2>検索件数</h2>
+    <mat-form-field>
+      <input matInput type="text" placeholder="search number">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <!-- 検索期間 -->
+    <h2>検索期間</h2>
+    <mat-radio-group class="searchPeriod-radio-group" [(ngModel)]="searchPeriod">
+      <mat-radio-button class="searchPeriod-radio-button" *ngFor="let searchPeriod of searchPeriods" [value]="searchPeriod">
+        {{searchPeriod}}  
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-divider></mat-divider>
+    <!-- 分析オプション -->
+    <h2>分析オプション</h2>
+    <mat-checkbox class="analyseOption-checkbox" [(ngModel)]="sentiment">Sentiment</mat-checkbox>
+    <mat-checkbox class="analyseOption-checkbox" [(ngModel)]="entity">Entity</mat-checkbox>
+    <mat-divider></mat-divider>
+
+  </mat-card-content>
+  <!-- アクション -->
+  <mat-card-actions>
+    <!-- 検索ボタン -->
+    <button mat-raised-button color="primary" (click)="openDialog()">SEARCH</button>
+    <p></p>
+  </mat-card-actions>
+</mat-card>
