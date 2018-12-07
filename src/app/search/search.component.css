@@ -1,31 +1,8 @@
-mat-card {
-    margin: 10px;
-}
-
-mat-card-content {
-    margin-left: 20px;
-}
-
-h2 {
-    margin-top: 15px;
-    margin-bottom: 0;
-}
-
-.searchPeriod-radio-group {
-    display: inline-flex;
-}
-
-.searchPeriod-radio-button {
-    margin: 10px 10px;
-}
-
-.analyseOption-checkbox {
-    display: inline-block;
-    margin: 10px 10px;
-}
-
-mat-card-actions {
+mat-accordion {
     margin: 20px;
-    text-align: center;
 }
 
+mat-panel-title {
+    text-align: center;
+    color: orangered;
+}

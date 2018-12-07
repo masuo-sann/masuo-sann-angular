@@ -1,0 +1,31 @@
+<!-- 検索語 -->
+<h2>検索語</h2>
+<mat-form-field>
+  <input matInput type="text" placeholder="search word" [formControl]="searchWordControl">
+  <mat-error *ngIf="searchWordControl.hasError('required')">
+    search word is <strong>required</strong>
+  </mat-error>
+</mat-form-field>
+<!-- 検索件数 -->
+<h2>検索件数</h2>
+<mat-form-field>
+  <input matInput type="text" placeholder="request number" [formControl]="requestNumberControl">
+  <mat-error *ngIf="requestNumberControl.hasError('required')">
+    request number is <strong>required</strong>
+  </mat-error>
+</mat-form-field>
+<!-- 検索期間 -->
+<h2>検索期間</h2>
+<mat-radio-group class="searchPeriod-radio-group" [(ngModel)]="searchPeriod">
+  <mat-radio-button class="searchPeriod-radio-button" *ngFor="let searchPeriod of searchPeriods" [value]="searchPeriod">
+    {{searchPeriod}}  
+  </mat-radio-button>
+</mat-radio-group>
+<!-- 分析オプション -->
+<h2>分析オプション</h2>
+<mat-checkbox class="analyseOption-checkbox" [(ngModel)]="sentiment">Sentiment</mat-checkbox>
+<mat-checkbox class="analyseOption-checkbox" [(ngModel)]="entity">Entity</mat-checkbox>
+<mat-action-row>
+    <button mat-button color="warn" (click)="close()">CLOSE</button>  
+    <button mat-button color="primary" (click)="openDialog()">SEARCH</button>
+</mat-action-row>
