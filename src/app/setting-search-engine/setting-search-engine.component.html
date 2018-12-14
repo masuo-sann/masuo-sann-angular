@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-header>
+    <h2>検索エンジン</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-spinner *ngIf='!isLoaded' [diameter]=50></mat-spinner>
+    <div>
+      <strong>{{message}}</strong>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+      <button mat-raised-button [disabled]='!isActive' color='warn' (click)='stop()'>STOP</button>
+      <button mat-raised-button [disabled]='isActive' color='primary' (click)='start()'>START</button>
+  </mat-card-actions>
+</mat-card>

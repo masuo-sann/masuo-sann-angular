@@ -11,14 +11,15 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from "@angular/materi
 
 // Componentはdeclarationに含める。
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
-import { ResultComponent } from './result/result.component';
-import { SearchRequestComponent } from './search-request/search-request.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SettingComponent } from './setting/setting.component';
+import { SearchComponent } from './search/search.component';
 import { SearchListComponent } from './search-list/search-list.component';
+import { SearchRequestComponent } from './search-request/search-request.component';
+import { ResultComponent } from './result/result.component';
 import { ResultListComponent } from './result-list/result-list.component';
+import { SettingComponent } from './setting/setting.component';
+import { SettingSearchEngineComponent } from './setting-search-engine/setting-search-engine.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 // Dialogに表示されるComponentはentryComponentsにも含める。
 import { SearchConfirmComponent } from "./search-confirm/search-confirm.component";
@@ -32,17 +33,17 @@ import { EgoSearchInterceptor } from "./interceptor/ego-search";
 @NgModule({
   declarations: [
     AppComponent,
+    NavBarComponent,
     SearchComponent,
     SearchDetailComponent,
-    ResultComponent,
-    SearchConfirmComponent,
     SearchRequestComponent,
-    NotFoundComponent,
-    NavBarComponent,
-    SettingComponent,
-    SearchListComponent,
-    ResultListComponent,
     SearchConfirmComponent,
+    SearchListComponent,
+    ResultComponent,
+    ResultListComponent,
+    SettingComponent,
+    SettingSearchEngineComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

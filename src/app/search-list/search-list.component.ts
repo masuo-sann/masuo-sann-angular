@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { SearchDetailComponent } from '../search-detail/search-detail.component';
 import { WordSearch } from "../interface/word-search";
 import { SearchService } from "../service/server/search.service";
@@ -36,7 +35,7 @@ export class SearchListComponent implements OnInit {
         } 
       },
       error => console.error(error)
-    )
+    );
   }
 
   applyFilter(filterValue: string) {
