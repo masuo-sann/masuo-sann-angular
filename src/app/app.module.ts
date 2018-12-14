@@ -12,7 +12,6 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from "@angular/materi
 // Componentはdeclarationに含める。
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
-import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { ResultComponent } from './result/result.component';
 import { SearchRequestComponent } from './search-request/search-request.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -23,6 +22,7 @@ import { ResultListComponent } from './result-list/result-list.component';
 
 // Dialogに表示されるComponentはentryComponentsにも含める。
 import { SearchConfirmComponent } from "./search-confirm/search-confirm.component";
+import { SearchDetailComponent } from './search-detail/search-detail.component';
 
 // providersに含める。
 import { ValidateService } from "./service/validate.service";
@@ -59,6 +59,6 @@ import { EgoSearchInterceptor } from "./interceptor/ego-search";
     {provide: HTTP_INTERCEPTORS, useClass: EgoSearchInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SearchConfirmComponent],  // Dialogに表示される
+  entryComponents: [SearchConfirmComponent, SearchDetailComponent],  // Dialogに表示される
 })
 export class AppModule { }

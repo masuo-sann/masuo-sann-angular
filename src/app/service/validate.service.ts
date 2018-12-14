@@ -14,7 +14,7 @@ export class ValidateService {
   */
   public getAnalyseOption(sentiment: boolean, entity: boolean): string {
     if(sentiment && entity){
-      return "BOTH";
+      return "SENTIMENT_AND_ENTITY";
     } else if(sentiment && !entity){
       return "ONLY_SENTIMENT";
     } else if(!sentiment && entity){

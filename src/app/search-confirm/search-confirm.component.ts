@@ -15,7 +15,8 @@ export class SearchConfirmComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<SearchConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SearchRequest,
-    public searchRepo: SearchService) { }
+    public searchRepo: SearchService,
+    ) { }
 
   ngOnInit() {
   }
@@ -26,17 +27,18 @@ export class SearchConfirmComponent implements OnInit {
 
   searchRequest(): void {
     this.searchRepo.searchRequest(this.data).subscribe(
-      resp => this.loginCheck(resp),
+      resp => {
+        if(resp.result === 'REDIRECT'){
+          console.log('redirect');
+          window.location.assign(resp.message);
+        } else if(resp.result === 'ERROR'){
+          console.error('error: ' + resp.message);
+          console.log(resp.body);
+        } else if(resp.result === 'SUCCESS'){
+          console.log('success!');
+        }
+      },
       error => console.error(error)
     )
   }
-
-  loginCheck(resp: ApiResponse<any>) :void {
-    if(resp.result === 'REDIRECT'){
-      console.log("REDIRECT");
-      window.location.assign(resp.message);
-      return;
-    }
-  }
-
 }

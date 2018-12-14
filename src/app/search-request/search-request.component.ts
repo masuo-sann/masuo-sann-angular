@@ -20,8 +20,8 @@ export class SearchRequestComponent implements OnInit {
   requestNumberControl: FormControl = new FormControl('', [
     Validators.required,
   ]);
-  searchPeriod: string = 'Week';
-  searchPeriods: string[] = ['Week', 'Month', 'Full'];
+  searchPeriod: string = 'WEEK';
+  searchPeriods: string[] = ['WEEK', 'MONTH', 'FULL'];
   sentiment: boolean = false;
   entity: boolean = false;
   analysisOption: string;
@@ -54,7 +54,6 @@ export class SearchRequestComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.searchWordControl.setValue(result.requestNumber);
     });
   }
 

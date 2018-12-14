@@ -1,4 +1,4 @@
-export interface Result {
+export interface WordSearch {
     searchWord: string;
     requestNumber: number;
     searchPeriod: string;

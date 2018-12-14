@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from "@angular/common/http";
-import { Observable, throwError, ErrorObserver } from "rxjs";
-import { catchError, retry } from "rxjs/operators";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { SearchRequest } from '../../interface/search-request';
-import { Result } from 'src/app/interface/result';
+import { WordSearch } from 'src/app/interface/word-search';
 import { ApiResponse } from 'src/app/interface/api-response';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-  })
+  }),
+  params: new HttpParams(),
 }
 
 @Injectable({
@@ -22,13 +22,15 @@ export class SearchService {
   
   constructor(private http: HttpClient) { }
 
-  public collectSearchingWord(): Observable<ApiResponse<Result>> {
+  public collectSearchingWord(): Observable<ApiResponse<WordSearch[]>> {
     console.log("[INFO] collectSearchingWord");
-    return this.http.post<ApiResponse<Result>>(this.collectSearchingWordUri, {state: "#"}, httpOptions);
+    return this.http.post<ApiResponse<WordSearch[]>>(this.collectSearchingWordUri, {state: "#"}, httpOptions);
   }
 
-  public searchRequest(searchRequest: SearchRequest): Observable<ApiResponse<null>> {
+  public searchRequest(searchRequest: SearchRequest): Observable<ApiResponse<WordSearch[]>> {
     console.log("[INFO] searchRequest");
+    console.log(searchRequest);
+    httpOptions.params.set('searchRequest', JSON.stringify(searchRequest));
     return this.http.post<ApiResponse<null>>(this.searchRequestUri, searchRequest, httpOptions);
   }
 

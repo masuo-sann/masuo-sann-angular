@@ -2,11 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { SearchDetailComponent } from '../search-detail/search-detail.component';
-import { Result } from "../interface/result";
-
-const ELEMENT_DATA: Result[] = [
-  {searchWord: 'Ishino', requestNumber: 10000, searchPeriod: "WEEK", analysisOption: "ONLY_ENTITY", status: "SEARCHING", user: "akihisaishino@gmail.com", searchDate: new Date()},
-];
+import { WordSearch } from "../interface/word-search";
+import { SearchService } from "../service/server/search.service";
 
 @Component({
   selector: 'app-search-list',
@@ -16,19 +13,37 @@ const ELEMENT_DATA: Result[] = [
 
 export class SearchListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public searchService: SearchService) { }
+
+  displayedColumns: string[] = ['registerDate', 'searchWord', 'requestNumber', 'status'];
+  ELEMENT_DATA: WordSearch[];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   ngOnInit() {
+    this.searchService.collectSearchingWord().subscribe(
+      resp => {
+        if(resp.result === 'REDIRECT'){
+          console.log('redirect');
+          window.location.assign(resp.message);
+        } else if(resp.result === 'ERROR'){
+          console.error('error: ' + resp.message);
+          console.log(resp.body);
+        } else if(resp.result === 'SUCCESS'){
+          console.log('success!');
+          this.ELEMENT_DATA = resp.body;
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          console.log(JSON.stringify(resp.body));
+        } 
+      },
+      error => console.error(error)
+    )
   }
-
-  displayedColumns: string[] = ['searchWord', 'requestNumber', 'searchPeriod', 'analysisOption'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDetail(result: Result): void {
+  openDetail(result: WordSearch): void {
     const dialogRef = this.dialog.open(SearchDetailComponent, {
       width: '500px',
       data: {

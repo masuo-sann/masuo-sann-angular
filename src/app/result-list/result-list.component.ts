@@ -2,9 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { SearchDetailComponent } from '../search-detail/search-detail.component';
-import { Result } from "../interface/result";
+import { WordSearch } from "../interface/word-search";
 
-const ELEMENT_DATA: Result[] = [
+const ELEMENT_DATA: WordSearch[] = [
   {searchWord: 'Ishino', requestNumber: 10000, searchPeriod: "WEEK", analysisOption: "ONLY_ENTITY", status: "SEARCHING", user: "akihisaishino@gmail.com", searchDate: new Date()},
 ];
 
@@ -28,7 +28,7 @@ export class ResultListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDetail(result: Result): void {
+  openDetail(result: WordSearch): void {
     const dialogRef = this.dialog.open(SearchDetailComponent, {
       width: '500px',
       data: {
