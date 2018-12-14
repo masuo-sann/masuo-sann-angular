@@ -1,28 +1,52 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatTableDataSource, MatPaginator } from '@angular/material';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { SearchDetailComponent } from '../search-detail/search-detail.component';
 import { WordSearch } from "../interface/word-search";
-
-const ELEMENT_DATA: WordSearch[] = [
-  {searchWord: 'Ishino', requestNumber: 10000, searchPeriod: "WEEK", analysisOption: "ONLY_ENTITY", status: "SEARCHING", user: "akihisaishino@gmail.com", searchDate: new Date()},
-];
+import { ResultService } from '../service/server/result.service';
 
 @Component({
   selector: 'app-result-list',
   templateUrl: './result-list.component.html',
-  styleUrls: ['./result-list.component.css']
+  styleUrls: ['./result-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 
 export class ResultListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public resultService: ResultService) { }
+
+  displayedColumns: string[] = ['registerDate', 'searchWord', 'requestNumber', 'status'];
+  ELEMENT_DATA: WordSearch[];
+  dataSource: MatTableDataSource<WordSearch>;
+  expandedElement: WordSearch | null;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    this.resultService.collectHistoryList().subscribe(
+      resp => {
+        if(resp.result === 'REDIRECT'){
+          console.log('redirect');
+          window.location.assign(resp.message);
+        } else if(resp.result === 'ERROR'){
+          console.error('error: ' + resp.message);
+          console.log(resp.body);
+        } else if(resp.result === 'SUCCESS'){
+          console.log('success!');
+          this.ELEMENT_DATA = resp.body;
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          this.dataSource.paginator = this.paginator;
+        } 
+      },
+    )
   }
-
-  displayedColumns: string[] = ['searchWord', 'requestNumber', 'searchPeriod', 'analysisOption'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

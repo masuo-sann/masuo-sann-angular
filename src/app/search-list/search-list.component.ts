@@ -17,7 +17,7 @@ export class SearchListComponent implements OnInit {
 
   displayedColumns: string[] = ['registerDate', 'searchWord', 'requestNumber', 'status'];
   ELEMENT_DATA: WordSearch[];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dataSource: MatTableDataSource<WordSearch>;
 
   ngOnInit() {
     this.searchService.collectSearchingWord().subscribe(
