@@ -12,10 +12,10 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from "@angular/materi
 // Componentはdeclarationに含める。
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SearchComponent } from './search/search.component';
+import { HomeComponent } from './home/home.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { SearchRequestComponent } from './search-request/search-request.component';
-import { ResultComponent } from './result/result.component';
+import { GamesComponent } from './games/games.component';
 import { ResultListComponent } from './result-list/result-list.component';
 import { SettingComponent } from './setting/setting.component';
 import { SettingSearchEngineComponent } from './setting-search-engine/setting-search-engine.component';
@@ -34,12 +34,12 @@ import { EgoSearchInterceptor } from "./interceptor/ego-search";
   declarations: [
     AppComponent,
     NavBarComponent,
-    SearchComponent,
+    HomeComponent,
     SearchDetailComponent,
     SearchRequestComponent,
     SearchConfirmComponent,
     SearchListComponent,
-    ResultComponent,
+    GamesComponent,
     ResultListComponent,
     SettingComponent,
     SettingSearchEngineComponent,

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchComponent } from "../search/search.component";
-import { ResultComponent } from "../result/result.component";
+import { HomeComponent } from "../home/home.component";
+import { GamesComponent } from "../games/games.component";
 import { SettingComponent } from "../setting/setting.component";
 import { NotFoundComponent } from "../not-found/not-found.component";
 
 const routes: Routes = [
-  { path: 'ego-search', component: SearchComponent },
-  { path: 'result', component: ResultComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'games', component: GamesComponent },
   { path: 'setting', component: SettingComponent },
   { path: '404', component: NotFoundComponent },
-  { path: '', redirectTo: '/ego-search', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '404' },
 ];
 
