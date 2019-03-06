@@ -11,5 +11,5 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
   }
-  title: string = 'EGO-SEARCHMAN';
+  title: string = 'masuo-sann';
 }
